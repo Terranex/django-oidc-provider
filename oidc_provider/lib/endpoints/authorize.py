@@ -73,7 +73,8 @@ class AuthorizeEndpoint(object):
             logger.debug('[Authorize] Missing redirect uri.')
             raise RedirectUriError()
         clean_redirect_uri = urlsplit(self.params.redirect_uri)
-        clean_redirect_uri = urlunsplit(clean_redirect_uri._replace(query=''))
+        #clean_redirect_uri = urlunsplit(clean_redirect_uri._replace(query='')) #Remove replace to accomodate params in redirect URI
+        clean_redirect_uri = urlunsplit(clean_redirect_uri)
         if not (clean_redirect_uri in self.client.redirect_uris):
             logger.debug('[Authorize] Invalid redirect uri: %s', self.params.redirect_uri)
             raise RedirectUriError()
